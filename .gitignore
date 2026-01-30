@@ -18,5 +18,3 @@ build/
 .mops
 
 .svelte-kit/
-
-sns/utils/ic_admin.pem
