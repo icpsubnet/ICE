@@ -1,3 +1,6 @@
+type BitcoinAddress = text;
 service : {
-  greet: (name: text) -> (text) query;
+  /// Returns the canister's Bitcoin (Taproot P2TR) address
+  /// Format: bc1p... on mainnet
+  get_canister_bitcoin_address: () -> (BitcoinAddress);
 }

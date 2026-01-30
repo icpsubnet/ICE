@@ -107,6 +107,10 @@ export interface SetPermissions {
   'commit' : Array<Principal>,
   'manage_permissions' : Array<Principal>,
 }
+export interface StateInfo {
+  'last_state_update_timestamp' : bigint,
+  'state_hash' : [] | [string],
+}
 export interface StreamingCallbackHttpResponse {
   'token' : [] | [StreamingCallbackToken],
   'body' : Uint8Array | number[],
@@ -160,6 +164,10 @@ export interface _SERVICE {
     [ComputeEvidenceArguments],
     [] | [Uint8Array | number[]]
   >,
+  /**
+   * Compute a hash over the canister content.  Call until it returns Some(hash).
+   */
+  'compute_state_hash' : ActorMethod<[], [] | [string]>,
   'configure' : ActorMethod<[ConfigureArguments], undefined>,
   'create_asset' : ActorMethod<[CreateAssetArguments], undefined>,
   'create_batch' : ActorMethod<[{}], { 'batch_id' : BatchId }>,
@@ -212,6 +220,10 @@ export interface _SERVICE {
     { 'content' : Uint8Array | number[] }
   >,
   'get_configuration' : ActorMethod<[], ConfigurationResponse>,
+  /**
+   * Get information about the current state of the canister
+   */
+  'get_state_info' : ActorMethod<[], StateInfo>,
   'grant_permission' : ActorMethod<[GrantPermission], undefined>,
   'http_request' : ActorMethod<[HttpRequest], HttpResponse>,
   'http_request_streaming_callback' : ActorMethod<
@@ -219,7 +231,7 @@ export interface _SERVICE {
     [] | [StreamingCallbackHttpResponse]
   >,
   'list' : ActorMethod<
-    [{}],
+    [{ 'start' : [] | [bigint], 'length' : [] | [bigint] }],
     Array<
       {
         'key' : Key,
@@ -232,6 +244,10 @@ export interface _SERVICE {
           }
         >,
         'content_type' : string,
+        'headers' : [] | [Array<HeaderField>],
+        'is_aliased' : [] | [boolean],
+        'allow_raw_access' : [] | [boolean],
+        'max_age' : [] | [bigint],
       }
     >
   >,

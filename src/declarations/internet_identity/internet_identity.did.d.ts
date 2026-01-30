@@ -609,10 +609,6 @@ export type IdentityMetadataReplaceError = {
       'space_available' : bigint,
     }
   };
-/**
- * API V2 specific types
- * WARNING: These type are experimental and may change in the future.
- */
 export type IdentityNumber = bigint;
 export interface IdentityPropertiesReplace { 'name' : [] | [string] }
 export type IdentityPropertiesReplaceError = {
@@ -709,9 +705,6 @@ export interface InternetIdentityStats {
    */
   'event_aggregations' : Array<[string, Array<[string, bigint]>]>,
 }
-/**
- * OpenID specific types
- */
 export type Iss = string;
 export type JWT = string;
 export type KeyType = { 'platform' : null } |
@@ -1092,10 +1085,6 @@ export interface _SERVICE {
     { 'Ok' : AccountInfo } |
       { 'Err' : CreateAccountError }
   >,
-  /**
-   * Legacy identity management API
-   * ==============================
-   */
   'create_challenge' : ActorMethod<[], Challenge>,
   'deploy_archive' : ActorMethod<[Uint8Array | number[]], DeployArchiveResult>,
   'enter_device_registration_mode' : ActorMethod<[UserNumber], Timestamp>,
@@ -1188,9 +1177,6 @@ export interface _SERVICE {
       { 'Err' : IdRegFinishError }
   >,
   /**
-   * V2 Identity Management API
-   * ==========================
-   * WARNING: The following methods are experimental and may ch 0ange in the future.
    * Starts the identity registration flow to create a new identity.
    */
   'identity_registration_start' : ActorMethod<
