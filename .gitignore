@@ -18,3 +18,7 @@ build/
 .mops
 
 .svelte-kit/
+
+.env
+.env.local
+.env.*.local
